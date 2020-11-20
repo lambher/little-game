@@ -1,48 +1,59 @@
+// get the canvas element
 const canvas = document.getElementById("canvas");
+// get the 2d context
 const ctx = canvas.getContext("2d");
 
-const perso = new Perso(ctx, 400, 400);
-const platforms = []
+// player
+const player = new Player(ctx, 400, 400);
 
+// array of platform
+const platforms = []
 platforms.push(new Platform(ctx, 200, 500, 400, 10))
 platforms.push(new Platform(ctx, 200, 300, 10, 400))
 
-perso.draw();
-
-document.onkeydown = keyPress;
-
-function keyPress(e) {
+// catch key event
+document.onkeydown = function (e) {
     console.log(e.key);
+    // check the type of key
     switch (e.key) {
         case "ArrowLeft":
-            perso.moveLeft();
+            player.moveLeft();
             break;
         case "ArrowRight":
-            perso.moveRight();
+            player.moveRight();
             break;
         case "ArrowUp":
-            perso.moveUp();
+            player.moveUp();
             break;
         case "ArrowDown":
-            perso.moveDown();
+            player.moveDown();
             break;
         case " ":
-            perso.speed += 1;
+            player.increaseSpeed();
             break;
     }
 }
 
+// draw the player and the platforms
 function draw() {
+    // clear all the canvas
     ctx.clearRect(0, 0, 800, 800);
-    perso.draw();
+
+    // draw the player
+    player.draw();
+
+    // draw each platform
     platforms.forEach(function name(platform) {
         platform.draw();
     })
 }
 
+// update the player
 function update() {
-    perso.update(platforms);
+    player.update(platforms);
 }
 
+// call draw function 60x per second
 setInterval(draw, 1000 / 60);
+// call update function 60x per second
 setInterval(update, 1000 / 60);
