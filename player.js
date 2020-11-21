@@ -7,17 +7,47 @@ class Player {
         this.x = x;
         this.y = y;
 
-        this.speed = 1;
+        this.speed = 2;
         this.direction = {
             x: 0,
             y: 1
         }
         this.width = 50;
         this.height = 50;
+        this.loadSprites();
+    }
+
+    loadSprites() {
+        this.sprite = new Sprite(ctx, [
+            "./assets/player/walk/Walk1.png",
+            "./assets/player/walk/Walk2.png",
+            "./assets/player/walk/Walk3.png",
+            "./assets/player/walk/Walk4.png",
+            "./assets/player/walk/Walk5.png",
+            "./assets/player/walk/Walk6.png",
+            "./assets/player/walk/Walk7.png",
+            "./assets/player/walk/Walk8.png",
+            "./assets/player/walk/Walk9.png",
+            "./assets/player/walk/Walk10.png",
+            "./assets/player/walk/Walk11.png",
+            "./assets/player/walk/Walk12.png",
+            "./assets/player/walk/Walk13.png",
+            "./assets/player/walk/Walk14.png",
+            "./assets/player/walk/Walk15.png",
+            "./assets/player/walk/Walk16.png",
+            "./assets/player/walk/Walk17.png",
+            "./assets/player/walk/Walk18.png",
+            "./assets/player/walk/Walk19.png",
+            "./assets/player/walk/Walk20.png",
+        ], 50, 50);
+
     }
 
     // update the perso for each frame
     update(platforms) {
+        this.sprite.update();
+
+
         // save the actual position
         const oldX = this.x;
         const oldY = this.y;
@@ -58,6 +88,7 @@ class Player {
 
     // set the direction to the right
     moveRight() {
+        this.sprite.startAnimation();
         this.direction.x = 1;
         this.direction.y = 0;
     }
@@ -70,6 +101,7 @@ class Player {
 
     // set the direction to the down
     moveDown() {
+        this.sprite.stopAnimation();
         this.direction.x = 0;
         this.direction.y = 1;
     }
@@ -81,7 +113,8 @@ class Player {
 
     // draw the player with a rect for each frame
     draw() {
-        ctx.fillStyle = 'green';
-        ctx.fillRect(this.x, this.y, this.width, this.height);
+        this.sprite.draw(this.x, this.y);
+        //        ctx.fillStyle = 'green';
+        //        ctx.fillRect(this.x, this.y, this.width, this.height);
     }
 }

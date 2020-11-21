@@ -34,8 +34,9 @@ document.onkeydown = function (e) {
     }
 }
 
-// draw the player and the platforms
-function draw() {
+// update and draw 60x / sec
+setInterval(function () {
+    player.update(platforms);
     // clear all the canvas
     ctx.clearRect(0, 0, 800, 800);
 
@@ -46,14 +47,4 @@ function draw() {
     platforms.forEach(function name(platform) {
         platform.draw();
     })
-}
-
-// update the player
-function update() {
-    player.update(platforms);
-}
-
-// call draw function 60x per second
-setInterval(draw, 1000 / 60);
-// call update function 60x per second
-setInterval(update, 1000 / 60);
+}, 1000 / 60);
